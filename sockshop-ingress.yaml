@@ -6,10 +6,6 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
-  tls:
-    - hosts:
-        - sockshop.local
-      secretName: sockshop-tls
   rules:
     - host: sockshop.local
       http:
