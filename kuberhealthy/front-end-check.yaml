@@ -1,0 +1,18 @@
+# Example: Save this in kuberhealthy/front-end-check.yaml
+apiVersion: comcast.github.io/v1
+kind: KuberhealthyCheck
+metadata:
+  name: front-end-check
+  namespace: kuberhealthy
+spec:
+  runInterval: 1m
+  timeout: 30s
+  podSpec:
+    containers:
+      - name: checker
+        image: curlimages/curl
+        args:
+          - sh
+          - -c
+          - >
+            curl -sf http://front-end.sock-shop.svc.cluster.local:80/health || exit 1
