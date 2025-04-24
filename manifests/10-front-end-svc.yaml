@@ -5,6 +5,7 @@ metadata:
   name: front-end
   annotations:
         prometheus.io/scrape: 'true'
+        prometheus.io/port: "8079"
   labels:
     name: front-end
   namespace: sock-shop
