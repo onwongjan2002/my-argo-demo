@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: kuberhealthy
+  namespace: monitoring  # must match Prometheus namespace
+  labels:
+    release: monitoring  # must match Helm release name of Prometheus
+spec:
+  selector:
+    matchLabels:
+      app: kuberhealthy  # must match Kuberhealthy's Service label
+  namespaceSelector:
+    matchNames:
+      - kuberhealthy
+  endpoints:
+    - port: http
+      path: /metrics
+      interval: 30s
