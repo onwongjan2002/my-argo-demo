@@ -1,0 +1,77 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-ingress
+  namespace: sock-shop
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-frontend-to-payment
+  namespace: sock-shop
+spec:
+  podSelector:
+    matchLabels:
+      app: payment
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: front-end
+  policyTypes:
+    - Ingress
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-frontend-to-shipping
+  namespace: sock-shop
+spec:
+  podSelector:
+    matchLabels:
+      app: shipping
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: front-end
+  policyTypes:
+    - Ingress
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-frontend-to-orders
+  namespace: sock-shop
+spec:
+  podSelector:
+    matchLabels:
+      app: orders
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: front-end
+  policyTypes:
+    - Ingress
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-frontend-to-cart
+  namespace: sock-shop
+spec:
+  podSelector:
+    matchLabels:
+      app: cart
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: front-end
+  policyTypes:
+    - Ingress
